@@ -72,7 +72,7 @@
     font-size: 24px; 
     text-transform: uppercase;
     text-decoration: none;
-    font-weight; 700;
+    font-weight: 700;
     letter-spacing: 2px;
   }
   header.sticky .logo {
@@ -169,7 +169,7 @@
   .work .content .workBx img {
     max-width: 100%;
   }
-  .testimonial {
+  /* .testimonial {
     background: #f7f7f7;
   }
   .testimonial .content {
@@ -201,7 +201,7 @@
     font-size: 14px;
     font-weight: 400;
     
-  }
+  } */
   .contact {
     background: rgb(15, 2, 37);
   }
@@ -252,7 +252,7 @@
   }
   .contactInfoBx .box {
     position: relative;
-    padding: 20px 0:
+    padding: 20px 0;
     display: flex;
   }
   .contactInfoBx .box .icon {

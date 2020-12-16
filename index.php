@@ -6,74 +6,24 @@ $username_err = $email_err = $msg_err = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
-    // Check if username is empty
-    if(empty(trim($_POST["name"]))){
-        $username_err = "Username cannot be blank";
-    }
-    else{
-        $sql = "SELECT id FROM contact WHERE Username = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        if($stmt)
-        {
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-
-            // Set the value of param username
-            $param_username = trim($_POST['name']);
-
-            // Try to execute this statement
-            if(mysqli_stmt_execute($stmt)){
-                mysqli_stmt_store_result($stmt);
-                if(mysqli_stmt_num_rows($stmt) == 1)
-                {
-                    $username_err = "This username is already taken"; 
-                }
-                else{
-                    $username = trim($_POST['name']);
-                }
-            }
-            else{
-                echo "Something went wrong";
-            }
-        }
-    }
-
-    mysqli_stmt_close($stmt);
-
-    // Check if username is empty
-    if(empty(trim($_POST["email"]))){
-      $email_err = "Email cannot be blank";
+  // Check if name is empty
+  if(empty(trim($_POST["name"]))){
+    $username_err = "Username cannot be blank";
   }
   else{
-      $sql = "SELECT id FROM contact WHERE Email = ?";
-      $stmt = mysqli_prepare($conn, $sql);
-      if($stmt)
-      {
-          mysqli_stmt_bind_param($stmt, "s", $param_email);
-
-          // Set the value of param username
-          $param_email = trim($_POST['email']);
-
-          // Try to execute this statement
-          if(mysqli_stmt_execute($stmt)){
-              mysqli_stmt_store_result($stmt);
-              if(mysqli_stmt_num_rows($stmt) == 1)
-              {
-                  $email_err = "This email is already taken"; 
-              }
-              else{
-                  $email = trim($_POST['email']);
-              }
-          }
-          else{
-              echo "Something went wrong";
-          }
-      }
+    $username = trim($_POST['name']);
   }
 
-  mysqli_stmt_close($stmt);
+  //Check if email is empty
+  if(empty(trim($_POST["email"]))){
+    $email_err = "Email cannot be blank";
+  }
+  else{
+    $email = trim($_POST['email']);
+  }
 
 
-  // Check if username is empty
+  // Check if msg is empty
   if(empty(trim($_POST["msg"]))){
     $msg_err = "Message cannot be blank";
   }
@@ -98,7 +48,6 @@ if(empty($username_err) && empty($email_err) && empty($msg_err)) {
 
         // Try to execute the query
         mysqli_stmt_execute($stmt);
-        // header("location: welcome.html");
     }
     mysqli_stmt_close($stmt);
 }
@@ -126,7 +75,6 @@ mysqli_close($conn);
         <li><a href="#about" onclick="toggleMenu();">About</a></li>
         <li><a href="#services" onclick="toggleMenu();">Service</a></li>
         <li><a href="#work" onclick="toggleMenu();">Work</a></li>
-        <!-- <li><a href="#testimonial" onclick="toggleMenu();">Testimonial</a></li> -->
         <li><a href="#contact" onclick="toggleMenu();">Contact</a></li>
       </ul>
     </header>
@@ -134,7 +82,6 @@ mysqli_close($conn);
     <section class="banner" id="home">
       <div class="textBx">
         <h2>Hi, I'm<br><span>Sreya Basu.</span></h2>
-        <!-- <h3>I am a Web developer.</h3> -->
         <a href="#about" class="btn">About Me</a>
         </section>
       
@@ -188,36 +135,30 @@ mysqli_close($conn);
             <h2>Content Writing</h2>
             <p>Any project needs content. Web services, web development, applications, this applies to everything.</p>
           </div>
-           <!-- <div class="servicesBx">
-            <img src="https://www.flaticon.com/svg/static/icons/svg/3074/3074754.svg">
-            <h2>Video Editing</h2>
-            <p>Regular video will turn into high-quality material with good editing and high-quality special effects.</p>
-          </div> -->
         </div>
       </section>
       
       <section class="work" id="work">
           <div class="heading">
           <h2>Latest Work</h2>
-           <!-- <p>UI|UX. Colour. Content. Design.</p>-->
+           
         </div>
         <div class="content">
           <div class="workBx">
-            <!-- <img src="https://sun9-45.userapi.com/KwGQ8Bb6clcoOkbAPF7p1IrfeS2IWHn4C76E5Q/Sl555IEnwU4.jpg"> -->
+            
             <img src="images/ui_ux.png" style = "height: 15rem;">
         </div>
           <div class="workBx">
-            <!--<img src="https://sun9-50.userapi.com/R3PehVnJ5ozOUDYy6Jt_i4mpquLOVZVynnY9aA/ThV0zWCo9Ik.jpg"> -->
-            <!--<img src="images/calc.png" style = "height: 25rem;"> -->
+        
             <img src="images/cal.png" style = "height: 15rem;">
 
         </div>
           <div class="workBx">
-            <!-- <img src="https://sun9-30.userapi.com/_cNxDWEDvEF9l-pLicT2bq2yR4CZy9UGxaewcA/SOiIPcMqvgk.jpg"> -->
+            
             <img src="images/ama.jpeg" style = "height: 15rem;">
         </div>
           <div class="workBx">
-            <!-- <img src="https://sun9-20.userapi.com/HWKn59nkstmFAuWW5bIBojXKQlH5mLPRA9ypPA/6MJg-HUGUek.jpg"> -->
+           
             <img src="images/cw.jpeg" style = "height: 15rem;">
         </div>
         </div>
@@ -225,26 +166,6 @@ mysqli_close($conn);
             <a href="#" class="btn">View More</a>
           </div>
       </section>
-      
-        <!-- <section class="testimonial" id="testimonial">
-          <div class="heading">
-          <h2>Testimonial</h2>
-            <p>A few words from clients</p>
-        </div>
-          <div class="content">
-            <div class="testimonialBx">
-              <p>Thank you very much for the work done. In your works, you can see the energy that you put into what you create. Your ideas are modern and attractive. Good luck to you.</p>
-              <h3>A.A.Blaze<br><span>Creative Designer</span></h3>
-            </div>
-            <div class="testimonialBx">
-              <p>For my project, I needed to make a beautiful and functional design. In search of a designer, I reviewed many different portfolios, until on one of the sites I accidentally saw the signature "Design
-web service Murat Toimet ".
-
-As a result of joint work, Murat invented and drew the design for the main and internal pages of the service. I was not mistaken in choosing a designer, I am more than satisfied with the result.</p>
-              <h3>Malika<br><span>Art Director</span></h3>
-            </div>
-          </div>
-        </section> -->
         
       <section class="contact" id="contact">
           <div class="heading white">
@@ -255,15 +176,6 @@ As a result of joint work, Murat invented and drew the design for the main and i
           <div class="contactInfo">
             <h3>Contact Info</h3>
             <div class="contactInfoBx">
-              <!-- <div class="box">
-                <div class="icon">
-                  <i class="fa fa-map-marker"></i>
-                </div>
-                  <div class="text">
-                     <h3>Address</h3>
-                      <p>20/2 Merkurii Street,<br>Shymkent, Kazakhstan,<br>160000</p>
-                </div>
-              </div> -->
               <div class="box" style = "float: left; align-items: center; margin-top: 50px;">
                 <div class="icon">
                   <i class="fa fa-phone"></i> 
